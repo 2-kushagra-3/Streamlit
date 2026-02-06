@@ -17,35 +17,66 @@ if "mood" not in st.session_state:
     st.session_state.mood = saved_mood
 
 # --------------------------------------------------
-# COLOR PALETTES (NO TRUE DARK MODE)
+# COLOR PALETTES
 # --------------------------------------------------
 PALETTES = {
-    None: {"bg": "#f5f1ea", "accent": "#7a6f63"},        # default beige
+    None: {"bg": "#f5f1ea", "accent": "#7a6f63"},        # beige default
     "Calm": {"bg": "#eef3ee", "accent": "#5f7a68"},
     "Soft happy": {"bg": "#f7ecef", "accent": "#9c5f6a"},
     "Nostalgic": {"bg": "#f2e6d8", "accent": "#7a5c45"},
-    "Late night": {"bg": "#e9ecf1", "accent": "#4b5563"},  # muted, NOT dark
+    "Late night": {"bg": "#e9ecf1", "accent": "#4b5563"},  # muted, not dark
 }
 
 palette = PALETTES.get(st.session_state.mood, PALETTES[None])
 
 # --------------------------------------------------
-# GLOBAL STYLES
+# GLOBAL STYLES (AESTHETIC + ROSE CURSOR)
 # --------------------------------------------------
 st.markdown(
     f"""
     <style>
     html, body, .stApp {{
         background-color: {palette['bg']} !important;
+        transition: background-color 0.6s ease;
     }}
+
     h1, h2, h3 {{
         color: {palette['accent']} !important;
-        font-family: Georgia, serif;
+        font-family: 'Playfair Display', Georgia, serif;
+        letter-spacing: 0.5px;
     }}
+
     p, label {{
         color: {palette['accent']} !important;
-        font-family: Arial, sans-serif;
+        font-family: 'Inter', Arial, sans-serif;
         font-size: 16px;
+        line-height: 1.7;
+    }}
+
+    .stButton > button {{
+        background-color: transparent;
+        border: 1px solid {palette['accent']};
+        color: {palette['accent']};
+        padding: 0.45em 1.4em;
+        border-radius: 24px;
+        transition: all 0.3s ease;
+    }}
+
+    .stButton > button:hover {{
+        background-color: {palette['accent']};
+        color: {palette['bg']};
+    }}
+
+    hr {{
+        border: none;
+        height: 1px;
+        background-color: {palette['accent']}33;
+        margin: 2em 0;
+    }}
+
+    /* Rose cursor (desktop only, mobile ignores) */
+    * {{
+        cursor: url("https://emojiapi.dev/api/v1/rose/32.png"), auto;
     }}
     </style>
     """,
@@ -87,8 +118,8 @@ elif st.session_state.page == 2:
     st.title("A quiet Valentine’s week")
 
     st.write("""
-    Valentine’s week has themes for each day.
-    I figured I’d reinterpret them… gently.
+    Valentine’s week comes with its own set of labels.  
+    I thought I’d take a quieter route.
     """)
 
     # -------- MOOD PICKER --------
@@ -138,7 +169,7 @@ elif st.session_state.page == 2:
 
         # -------- FINAL MESSAGE --------
         st.write("""
-        If today quietly feels like a rose kind of day…  
-        I’m not hard to find.
+        If today happens to carry a hint of roses,  
+        I’m around.
         """)
 
