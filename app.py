@@ -46,7 +46,7 @@ elif st.session_state.page == 2:
 
     st.write("""
     Valentine’s week usually comes with a lot of labels.
-    I thought I’d reinterpret it — gently.
+    I thought I’d reinterpret it.
     """)
 
     mood = st.selectbox(
