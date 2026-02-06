@@ -2,8 +2,46 @@ import streamlit as st
 
 st.set_page_config(page_title="Just a Small App", layout="centered")
 
+# ---------- STATE ----------
 if "page" not in st.session_state:
     st.session_state.page = 1
+
+if "mood" not in st.session_state:
+    st.session_state.mood = "Default"
+
+# ---------- COLOR PALETTES ----------
+palettes = {
+    "Default": {"bg": "#f5f1ea", "accent": "#7a6f63"},
+    "Calm": {"bg": "#eef3ee", "accent": "#5f7a68"},
+    "Soft happy": {"bg": "#f7ecef", "accent": "#9c5f6a"},
+    "Nostalgic": {"bg": "#f2e6d8", "accent": "#7a5c45"},
+    "Late night": {"bg": "#1f2633", "accent": "#c2c6d3"},
+}
+
+palette = palettes.get(st.session_state.mood, palettes["Default"])
+
+# ---------- GLOBAL STYLES ----------
+st.markdown(
+    f"""
+    <style>
+    body {{
+        background-color: {palette['bg']};
+    }}
+    .stApp {{
+        background-color: {palette['bg']};
+    }}
+    h1, h2, h3 {{
+        color: {palette['accent']};
+        font-family: 'Georgia', serif;
+    }}
+    p, label {{
+        color: {palette['accent']};
+        font-family: 'Arial', sans-serif;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # ---------- PAGE 1 ----------
 if st.session_state.page == 1:
@@ -32,41 +70,44 @@ if st.session_state.page == 1:
 
 # ---------- PAGE 2 ----------
 elif st.session_state.page == 2:
-    st.title("A small Valentine’s week experiment")
+    st.title("A quiet Valentine’s week")
 
     st.write("""
     Valentine’s week has themes for each day.
-    I figured I’d reinterpret them… quietly.
+    I figured I’d reinterpret them… gently.
     """)
 
-    st.subheader("🌹 Feb 7 — Rose Day (but not really)")
+    st.subheader("🌹 Feb 7 — Rose Day")
 
     mood = st.radio(
         "Pick a mood for today:",
-        ["Calm", "Soft happy", "Slightly nostalgic", "Random energy"]
+        ["Calm", "Soft happy", "Nostalgic", "Late night"],
+        index=0
     )
+
+    st.session_state.mood = mood
 
     songs = {
         "Calm": {
             "title": "Coldplay – Sparks",
             "link": "https://open.spotify.com/track/7D0RhFcb3CrfPuTJ0obrod",
-            "caption": "Low volume. No distractions."
+            "caption": "Soft. Unrushed. Almost silent."
         },
         "Soft happy": {
             "title": "Rex Orange County – Sunflower",
             "link": "https://open.spotify.com/track/0xY0i9l2E12LHG0L1r5Q3s",
-            "caption": "Feels like a good afternoon."
+            "caption": "Feels like light through a window."
         },
-        "Slightly nostalgic": {
-            "title": "Prateek Kuhad – Kasoor (Acoustic)",
-            "link": "https://open.spotify.com/track/4A9tZpP0R9zRkD6rP8b0Fs",
-            "caption": "Some songs just sit quietly."
+        "Nostalgic": {
+            "title": "Chhu Kar Mere Mann Ko",
+            "link": "https://open.spotify.com/track/1Pz4D6Kx9mVjvGZ0r7dxyz",
+            "caption": "Some songs remember things for us."
         },
-        "Random energy": {
-            "title": "Lauv – Paris in the Rain",
-            "link": "https://open.spotify.com/track/41CgzGD7xlgnJe14R4cqkL",
-            "caption": "No particular reason. Just because."
-        }
+        "Late night": {
+            "title": "Arctic Monkeys – 505",
+            "link": "https://open.spotify.com/track/2eVYJ2eJv9Fbl9p1h4pY7X",
+            "caption": "Best heard when the world slows down."
+        },
     }
 
     st.markdown(f"### 🎧 {songs[mood]['title']}")
@@ -75,11 +116,8 @@ elif st.session_state.page == 2:
 
     st.divider()
 
-    st.write("Quick reaction (optional):")
-    reaction = st.radio(
-        "",
-        ["This fits today", "Not my vibe", "Saving this"]
-    )
-
-    st.caption("That’s it for today. Nothing to overthink.")
+    st.write("""
+    If today happens to feel a little like rose day…  
+    I’m just a message away.
+    """)
 
