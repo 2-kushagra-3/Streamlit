@@ -1,13 +1,9 @@
 import streamlit as st
-from datetime import date
 
 # --------------------------------------------------
 # CONFIG
 # --------------------------------------------------
 st.set_page_config(page_title="Just a Small App", layout="centered")
-
-TODAY = date.today()
-UNLOCK_DATE = date(TODAY.year, 2, 7)
 
 # --------------------------------------------------
 # STATE INIT
@@ -87,12 +83,6 @@ if st.session_state.page == 1:
 # PAGE 2 — EXPERIENCE
 # --------------------------------------------------
 elif st.session_state.page == 2:
-
-    # -------- DATE LOCK --------
-    if TODAY < UNLOCK_DATE:
-        st.title("Almost")
-        st.write("Not quite today. This opens with the week 🌹")
-        st.stop()
 
     st.title("A quiet Valentine’s week")
 
