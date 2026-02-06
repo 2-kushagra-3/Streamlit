@@ -38,6 +38,9 @@ if "theme_name" not in st.session_state:
 if "step" not in st.session_state:
     st.session_state.step = 1
 
+if "started" not in st.session_state:
+    st.session_state.started = False
+
 def apply_theme(theme):
     st.markdown(
         f"""
@@ -106,6 +109,23 @@ theme_name = st.selectbox(
 st.session_state.theme_name = theme_name
 apply_theme(THEMES[theme_name])
 
+if not st.session_state.started:
+    st.subheader("Before we begin")
+    st.markdown("<div class='card'>", unsafe_allow_html=True)
+    st.write(
+        "I was bored, scrolling through a quiet evening, when it hit me: "
+        "it’s Valentine’s Week. Instead of overthinking it, I decided to make "
+        "something small and simple—just a little journey, made because… why not."
+    )
+    st.write(
+        "It’s subtle on purpose. No big declarations—just soft notes, gentle "
+        "moments, and a vibe that feels like us."
+    )
+    if st.button("Start the journey"):
+        st.session_state.started = True
+    st.markdown("</div>", unsafe_allow_html=True)
+    st.stop()
+
 with st.container():
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.caption("Progress")
@@ -131,7 +151,7 @@ with col5:
 st.divider()
 
 if st.session_state.step == 1:
-    st.subheader("Step 1: First hello")
+    st.subheader("Step 1: February 7 — Soft start")
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     name = st.text_input("Your name", "Friend")
     vibe = st.slider("How are you feeling today?", 0, 10, 7)
@@ -144,7 +164,7 @@ if st.session_state.step == 1:
     st.markdown("</div>", unsafe_allow_html=True)
 
 elif st.session_state.step == 2:
-    st.subheader("Step 2: Small notes")
+    st.subheader("Step 2: Little Valentine notes")
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.write("Pick a note to reveal:")
     c1, c2, c3 = st.columns(3)
@@ -160,7 +180,7 @@ elif st.session_state.step == 2:
     st.markdown("</div>", unsafe_allow_html=True)
 
 elif st.session_state.step == 3:
-    st.subheader("Step 3: Music and movie night")
+    st.subheader("Step 3: Valentine playlist + films")
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.write("Here are some picks. Replace these with your real links.")
     st.markdown(
@@ -181,26 +201,26 @@ elif st.session_state.step == 3:
     st.markdown("</div>", unsafe_allow_html=True)
 
 elif st.session_state.step == 4:
-    st.subheader("Step 4: Little quiz")
+    st.subheader("Step 4: Tiny favorites")
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     q1 = st.selectbox("Coffee order?", ["Latte", "Mocha", "Cold brew", "Tea"])
-    q2 = st.selectbox("Ideal hangout?", ["Cafe", "Movie night", "Walk", "Arcade"])
+    q2 = st.selectbox("Valentine snack?", ["Chocolate", "Strawberries", "Popcorn", "Cookies"])
     q3 = st.selectbox("Sweet or savory?", ["Sweet", "Savory"])
     if st.button("Reveal my guess"):
         st.info(f"My guess: {q1}, {q2}, and {q3}.")
     st.markdown("</div>", unsafe_allow_html=True)
 
 elif st.session_state.step == 5:
-    st.subheader("Step 5: The tiny question")
+    st.subheader("Step 5: A small promise")
     st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.write("Would you like to make a small plan together?")
+    st.write("We’re in different cities, so this stays gentle and simple.")
     col_yes, col_no = st.columns(2)
     with col_yes:
-        if st.button("Yes"):
-            st.success("Yay. Let's pick a day and make it simple and sweet.")
+        if st.button("Send a note"):
+            st.success("A tiny note goes a long way. I’m glad you’re here.")
     with col_no:
-        if st.button("Maybe later"):
-            st.info("Totally okay. Friendship is already a good thing.")
+        if st.button("Keep it quiet"):
+            st.info("Quiet is good too. This is enough.")
     with st.expander("Final message"):
         st.write(
             "Thanks for being here. This week is just a small way to say you matter."
