@@ -18,21 +18,20 @@ if st.session_state.page == 1:
     st.title("Hey")
 
     st.write("""
-    This started pretty randomly.
+    So this started very randomly.
 
-    I was bored, pretending to be productive,
-    glanced at the calendar —
-    and realised it’s Valentine’s week already.
+    I was bored, scrolling through an excel, pretending to be productive…
+    and then I noticed — it’s Valentine’s Week already.
 
-    No big reason.
-    No grand plan.
+    No big plans. No dramatic reason.
+    Just one of those *“huh… why not?”* moments.
 
-    Just one of those moments where you build something
-    because you can.
+    So I decided to build something small.
+    Something light.
+    Something that fits the week — without making a big deal out of it.
 
-    Anyway,
-    since you’ve made it this far —
-    might as well keep going.
+    Anyway… since you’re here now,
+    might as well continue 
     """)
 
     if st.button("Continue →"):
@@ -51,8 +50,8 @@ elif st.session_state.page == 2:
     """)
 
     mood = st.selectbox(
-        "What kind of mood fits today?",
-        ["", "Calm", "Soft happy", "Nostalgic", "Late night"],
+        "What feels right today?",
+        ["Calm", "Soft happy", "Nostalgic", "Late night"],
         index=0
     )
 
