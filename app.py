@@ -1,21 +1,29 @@
 import streamlit as st
+from datetime import date
 
 st.set_page_config(page_title="Just a Small App", layout="centered")
 
-# ---------- STATE ----------
+# ---------- DATE LOCK ----------
+TODAY = date.today()
+UNLOCK_DATE = date(2026, 2, 7)  # adjust year if needed
+
+# ---------- LOAD SAVED MOOD ----------
+query_params = st.experimental_get_query_params()
+saved_mood = query_params.get("mood", ["Default"])[0]
+
 if "page" not in st.session_state:
     st.session_state.page = 1
 
 if "mood" not in st.session_state:
-    st.session_state.mood = "Default"
+    st.session_state.mood = saved_mood
 
-# ---------- COLOR PALETTES ----------
+# ---------- COLOR PALETTES (FIXED) ----------
 palettes = {
     "Default": {"bg": "#f5f1ea", "accent": "#7a6f63"},
     "Calm": {"bg": "#eef3ee", "accent": "#5f7a68"},
     "Soft happy": {"bg": "#f7ecef", "accent": "#9c5f6a"},
     "Nostalgic": {"bg": "#f2e6d8", "accent": "#7a5c45"},
-    "Late night": {"bg": "#1f2633", "accent": "#c2c6d3"},
+    "Late night": {"bg": "#e9ecf1", "accent": "#4b5563"},  # FIXED (not dark)
 }
 
 palette = palettes.get(st.session_state.mood, palettes["Default"])
@@ -24,18 +32,16 @@ palette = palettes.get(st.session_state.mood, palettes["Default"])
 st.markdown(
     f"""
     <style>
-    body {{
-        background-color: {palette['bg']};
-    }}
-    .stApp {{
-        background-color: {palette['bg']};
+    html, body, [class*="st-"] {{
+        background-color: {palette['bg']} !important;
+        color: {palette['accent']} !important;
     }}
     h1, h2, h3 {{
-        color: {palette['accent']};
+        color: {palette['accent']} !important;
         font-family: 'Georgia', serif;
     }}
-    p, label {{
-        color: {palette['accent']};
+    p {{
+        color: {palette['accent']} !important;
         font-family: 'Arial', sans-serif;
     }}
     </style>
@@ -72,20 +78,27 @@ if st.session_state.page == 1:
 elif st.session_state.page == 2:
     st.title("A quiet Valentine’s week")
 
+    # ---- DATE LOCK ----
+    if TODAY < UNLOCK_DATE:
+        st.write("Not quite today. Check back when the week begins 🌹")
+        st.stop()
+
     st.write("""
     Valentine’s week has themes for each day.
     I figured I’d reinterpret them… gently.
     """)
 
-    st.subheader("🌹 Feb 7 — Rose Day")
-
     mood = st.radio(
         "Pick a mood for today:",
         ["Calm", "Soft happy", "Nostalgic", "Late night"],
-        index=0
+        index=["Calm", "Soft happy", "Nostalgic", "Late night"].index(
+            st.session_state.mood
+        ) if st.session_state.mood in palettes else 0
     )
 
+    # ---- SAVE MOOD ----
     st.session_state.mood = mood
+    st.experimental_set_query_params(mood=mood)
 
     songs = {
         "Calm": {
@@ -100,7 +113,7 @@ elif st.session_state.page == 2:
         },
         "Nostalgic": {
             "title": "Chhu Kar Mere Mann Ko",
-            "link": "https://open.spotify.com/track/1Pz4D6Kx9mVjvGZ0r7dxyz",
+            "link": "https://open.spotify.com/track/4oYFq0kYzZpVbJX9WJZxyz",
             "caption": "Some songs remember things for us."
         },
         "Late night": {
@@ -110,6 +123,9 @@ elif st.session_state.page == 2:
         },
     }
 
+    # 🌹 ROSE APPEARS ONLY AFTER MOOD PICK
+    st.markdown("## 🌹")
+
     st.markdown(f"### 🎧 {songs[mood]['title']}")
     st.markdown(f"[Open song ↗]({songs[mood]['link']})")
     st.caption(songs[mood]['caption'])
@@ -117,7 +133,7 @@ elif st.session_state.page == 2:
     st.divider()
 
     st.write("""
-    If today happens to feel a little like rose day…  
-    I’m just a message away.
+    If today quietly feels like a rose kind of day…  
+    I’m not hard to find.
     """)
 
