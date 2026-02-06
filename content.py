@@ -8,23 +8,23 @@ PALETTES = {
 
 SONGS = {
     "Calm": {
-        "title": "Coldplay – Sparks",
-        "link": "https://open.spotify.com/track/7D0RhFcb3CrfPuTJ0obrod",
+        "title": "Little Old You – The Okee Dokee Brothers",
+        "link": "https://open.spotify.com/track/1DOxXwapZRaMXYeoCaFQow?si=7e28d8f6ce3148eb",
         "caption": "Soft. Unrushed. Almost weightless."
     },
     "Soft happy": {
-        "title": "Rex Orange County – Sunflower",
-        "link": "https://open.spotify.com/track/0xY0i9l2E12LHG0L1r5Q3s",
+        "title": "Voh dekhne mai - Ali Zafar",
+        "link": "https://open.spotify.com/track/0EMYTe2oQy70PCKPQFlbVy?si=69ad828b299a4c49",
         "caption": "Light, warm, and uncomplicated."
     },
     "Nostalgic": {
         "title": "Chhu Kar Mere Mann Ko",
-        "link": "https://open.spotify.com/track/1ZyudLFv35SRvY5tq7Lz4k",
+        "link": "https://open.spotify.com/track/0v4XubqwHaooGGZ1W9QjUO?si=a473a6ccde2a4be2",
         "caption": "Some songs remember things better than we do."
     },
     "Late night": {
         "title": "Arctic Monkeys – 505",
-        "link": "https://open.spotify.com/track/2eVYJ2eJv9Fbl9p1h4pY7X",
+        "link": "https://open.spotify.com/track/0BxE4FqsDD1Ot4YuBXwAPp?si=1b4c7fcabb7a429d",
         "caption": "Best heard when everything else goes quiet."
     },
 }
