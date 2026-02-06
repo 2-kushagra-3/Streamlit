@@ -1,17 +1,20 @@
 import streamlit as st
-
-from state import init_state, set_mood
 from styles import apply_theme
 from content import SONGS, FINAL_MESSAGES
 
 st.set_page_config(page_title="Just a Small App", layout="centered")
 
-# ---------- INIT ----------
-init_state()
-apply_theme(st.session_state.mood)
+# ---------- STATE ----------
+if "page" not in st.session_state:
+    st.session_state.page = 1
+
+if "mood" not in st.session_state:
+    st.session_state.mood = None
 
 # ---------- PAGE 1 ----------
 if st.session_state.page == 1:
+    apply_theme(None)
+
     st.title("Hey")
 
     st.write("""
@@ -38,6 +41,8 @@ if st.session_state.page == 1:
 
 # ---------- PAGE 2 ----------
 elif st.session_state.page == 2:
+    apply_theme(st.session_state.mood)
+
     st.title("A quieter take on the week")
 
     st.write("""
@@ -52,7 +57,12 @@ elif st.session_state.page == 2:
     )
 
     if mood:
-        set_mood(mood)
+        # ✅ commit mood FIRST
+        st.session_state.mood = mood
+
+        # ✅ re-apply theme AFTER commit
+        apply_theme(st.session_state.mood)
+
         song = SONGS[mood]
 
         st.markdown("### 🌹")
