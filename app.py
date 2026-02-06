@@ -2,7 +2,7 @@ import streamlit as st
 from styles import apply_theme
 from content import SONGS, FINAL_MESSAGES
 
-st.set_page_config(page_title="Just a Small App", layout="centered")
+st.set_page_config(page_title="Just a cute lil App", layout="centered")
 
 # ---------- STATE ----------
 if "page" not in st.session_state:
@@ -21,14 +21,14 @@ if st.session_state.page == 1:
     So this started very randomly.
 
     I was bored, scrolling through an excel, pretending to be productive…
-    and then I noticed — it’s Valentine’s Week already.
+    and then I noticed it’s Valentine’s Week already.
 
     No big plans. No dramatic reason.
     Just one of those *“huh… why not?”* moments.
 
     So I decided to build something small.
     Something light.
-    Something that fits the week — without making a big deal out of it.
+    Something that fits the week without making a big deal out of it.
 
     Anyway… since you’re here now,
     might as well continue 
@@ -51,7 +51,7 @@ elif st.session_state.page == 2:
 
     mood = st.selectbox(
         "What feels right today?",
-        ["Calm", "Soft happy", "Nostalgic", "Late night"],
+        ["","Calm", "Soft happy", "Nostalgic", "Late night"],
         index=0
     )
 
