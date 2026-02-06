@@ -20,17 +20,17 @@ if "mood" not in st.session_state:
 # COLOR PALETTES
 # --------------------------------------------------
 PALETTES = {
-    None: {"bg": "#f5f1ea", "accent": "#7a6f63"},        # beige default
+    None: {"bg": "#f5f1ea", "accent": "#7a6f63"},
     "Calm": {"bg": "#eef3ee", "accent": "#5f7a68"},
     "Soft happy": {"bg": "#f7ecef", "accent": "#9c5f6a"},
     "Nostalgic": {"bg": "#f2e6d8", "accent": "#7a5c45"},
-    "Late night": {"bg": "#e9ecf1", "accent": "#4b5563"},  # muted, not dark
+    "Late night": {"bg": "#e9ecf1", "accent": "#4b5563"},
 }
 
 palette = PALETTES.get(st.session_state.mood, PALETTES[None])
 
 # --------------------------------------------------
-# GLOBAL STYLES (AESTHETIC + ROSE CURSOR)
+# GLOBAL STYLES + ROSE CURSOR
 # --------------------------------------------------
 st.markdown(
     f"""
@@ -43,7 +43,6 @@ st.markdown(
     h1, h2, h3 {{
         color: {palette['accent']} !important;
         font-family: 'Playfair Display', Georgia, serif;
-        letter-spacing: 0.5px;
     }}
 
     p, label {{
@@ -74,7 +73,6 @@ st.markdown(
         margin: 2em 0;
     }}
 
-    /* Rose cursor (desktop only, mobile ignores) */
     * {{
         cursor: url("https://emojiapi.dev/api/v1/rose/32.png"), auto;
     }}
@@ -90,20 +88,21 @@ if st.session_state.page == 1:
     st.title("Hey")
 
     st.write("""
-    So this started very randomly.
+    This started pretty randomly.
 
-    I was bored, scrolling through the calendar, pretending to be productive…
-    and then I noticed — it’s Valentine’s Week already.
+    I was bored, pretending to be productive,
+    glanced at the calendar —
+    and realised it’s Valentine’s week already.
 
-    No big plans. No dramatic reason.
-    Just one of those *“huh… why not?”* moments.
+    No big reason.
+    No grand plan.
 
-    So I decided to build something small.
-    Something light.
-    Something that fits the week — without making a big deal out of it.
+    Just one of those moments where you build something
+    because you can.
 
-    Anyway… since you’re here now,
-    might as well continue 🙂
+    Anyway,
+    since you’ve made it this far —
+    might as well keep going.
     """)
 
     if st.button("Continue →"):
@@ -115,16 +114,16 @@ if st.session_state.page == 1:
 # --------------------------------------------------
 elif st.session_state.page == 2:
 
-    st.title("A quiet Valentine’s week")
+    st.title("A quieter take on the week")
 
     st.write("""
-    Valentine’s week comes with its own set of labels.  
-    I thought I’d take a quieter route.
+    Valentine’s week usually comes with a lot of labels.
+    I thought I’d reinterpret it —
+    gently.
     """)
 
-    # -------- MOOD PICKER --------
     mood = st.selectbox(
-        "Pick a mood for today:",
+        "What kind of mood fits today?",
         ["", "Calm", "Soft happy", "Nostalgic", "Late night"],
         index=0
     )
@@ -137,28 +136,46 @@ elif st.session_state.page == 2:
             "Calm": {
                 "title": "Coldplay – Sparks",
                 "link": "https://open.spotify.com/track/7D0RhFcb3CrfPuTJ0obrod",
-                "caption": "Soft. Unrushed. Almost silent."
+                "caption": "Soft. Unrushed. Almost weightless."
             },
             "Soft happy": {
                 "title": "Rex Orange County – Sunflower",
                 "link": "https://open.spotify.com/track/0xY0i9l2E12LHG0L1r5Q3s",
-                "caption": "Feels like light through a window."
+                "caption": "Light, warm, and uncomplicated."
             },
             "Nostalgic": {
                 "title": "Chhu Kar Mere Mann Ko",
                 "link": "https://open.spotify.com/track/1ZyudLFv35SRvY5tq7Lz4k",
-                "caption": "Some songs remember things for us."
+                "caption": "Some songs remember things better than we do."
             },
             "Late night": {
                 "title": "Arctic Monkeys – 505",
                 "link": "https://open.spotify.com/track/2eVYJ2eJv9Fbl9p1h4pY7X",
-                "caption": "Best heard when the world slows down."
+                "caption": "Best heard when everything else goes quiet."
             },
+        }
+
+        FINAL_MESSAGES = {
+            "Calm": """
+            If the day feels slow and unhurried,
+            I wouldn’t mind keeping it that way.
+            """,
+            "Soft happy": """
+            If today carries a lighter kind of smile,
+            that feels like a good thing to share.
+            """,
+            "Nostalgic": """
+            If you find yourself drifting a little,
+            I’m not far.
+            """,
+            "Late night": """
+            If the night feels longer than usual,
+            conversations still work after midnight.
+            """,
         }
 
         song = SONGS[mood]
 
-        # -------- ROSE (ONLY AFTER MOOD) --------
         st.markdown("## 🌹")
 
         st.markdown(f"### 🎧 {song['title']}")
@@ -167,9 +184,4 @@ elif st.session_state.page == 2:
 
         st.divider()
 
-        # -------- FINAL MESSAGE --------
-        st.write("""
-        If today happens to carry a hint of roses,  
-        I’m around.
-        """)
-
+        st.write(FINAL_MESSAGES[mood])
