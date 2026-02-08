@@ -39,7 +39,7 @@ def apply_theme(mood):
         }}
 
         * {{
-            cursor: url("https://emojiapi.dev/api/v1/rose/32.png"), auto;
+            cursor: url("https://emojiapi.dev/api/v1/chocolate_bar/32.png"), auto;
         }}
         </style>
         """,

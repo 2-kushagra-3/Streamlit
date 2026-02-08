@@ -2,7 +2,7 @@ import streamlit as st
 from styles import apply_theme
 from content import SONGS, FINAL_MESSAGES
 
-st.set_page_config(page_title="Just a cute lil App", layout="centered")
+st.set_page_config(page_title="Just a Small App", layout="centered")
 
 # ---------- STATE ----------
 if "page" not in st.session_state:
@@ -18,20 +18,17 @@ if st.session_state.page == 1:
     st.title("Hey")
 
     st.write("""
-    So this started very randomly.
+    This started pretty randomly.
 
-    I was bored, scrolling through an excel, pretending to be productive…
-    and then I noticed it’s Valentine’s Week already.
+    I was bored, pretending to be productive,
+    glanced at the calendar —
+    and noticed it’s Chocolate Day.
 
-    No big plans. No dramatic reason.
-    Just one of those *“huh… why not?”* moments.
+    No big idea behind it.
+    Just felt like one of those days
+    where you lean into small comforts.
 
-    So I decided to build something small.
-    Something light.
-    Something that fits the week without making a big deal out of it.
-
-    Anyway… since you’re here now,
-    might as well continue 
+    So I made this.
     """)
 
     if st.button("Continue →"):
@@ -42,29 +39,27 @@ if st.session_state.page == 1:
 elif st.session_state.page == 2:
     apply_theme(st.session_state.mood)
 
-    st.title("A quieter take on the week")
+    st.title("Something for today")
 
     st.write("""
-    Valentine’s week usually comes with a lot of labels.
-    I thought I’d reinterpret it.
+    Chocolate Day feels less about gestures
+    and more about quiet indulgences.
+    I thought I’d keep it that way.
     """)
 
     mood = st.selectbox(
         "What feels right today?",
-        ["","Calm", "Soft happy", "Nostalgic", "Late night"],
+        ["", "Calm", "Soft happy", "Nostalgic", "Late night"],
         index=0
     )
 
     if mood:
-        # ✅ commit mood FIRST
         st.session_state.mood = mood
-
-        # ✅ re-apply theme AFTER commit
         apply_theme(st.session_state.mood)
 
         song = SONGS[mood]
 
-        st.markdown("### 🌹")
+        st.markdown("### 🍫")
         st.markdown(f"**🎧 {song['title']}**")
         st.markdown(f"[Open song ↗]({song['link']})")
         st.caption(song["caption"])
